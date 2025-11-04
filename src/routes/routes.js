@@ -29,36 +29,37 @@ routes.post('/clientes/register', AuthCliente.register);
 routes.post('/clientes/login', AuthCliente.login);
 
 // --- Rotas protegidas de cliente ---
-routes.get('/clientes/me', authClienteMiddleware, Cliente.readOne); // Dados do cliente logado
-routes.put('/clientes/me', authClienteMiddleware, Cliente.update);
-routes.delete('/clientes/me', authClienteMiddleware, Cliente.remove);
+routes.get('/clientes', authClienteMiddleware, Cliente.read); //Dados do cliente logado
+routes.get('/clientes/:id', authClienteMiddleware, Cliente.readOne);
+routes.put('/clientes/:id', authClienteMiddleware, Cliente.update);
+routes.delete('/clientes/:id', authClienteMiddleware, Cliente.remove);
 
 // Pedidos do cliente
-routes.post('/pedidos', authClienteMiddleware, Pedido.create);
-routes.get('/pedidos', authClienteMiddleware, Pedido.read);
-routes.get('/pedidos/:id', authClienteMiddleware, Pedido.readOne);
-routes.put('/pedidos/:id', authClienteMiddleware, Pedido.update);
-routes.delete('/pedidos/:id', authClienteMiddleware, Pedido.remove);
+routes.post('/pedidos', Pedido.create);
+routes.get('/pedidos', Pedido.read);
+routes.get('/pedidos/:id', Pedido.readOne);
+routes.put('/pedidos/:id',  Pedido.update);
+routes.delete('/pedidos/:id', Pedido.remove);
 
 // Itens de pedido
-routes.post('/itens', authClienteMiddleware, Item.create);
-routes.get('/itens', authClienteMiddleware, Item.read);
-routes.get('/itens/:id', authClienteMiddleware, Item.readOne);
-routes.put('/itens/:id', authClienteMiddleware, Item.update);
-routes.delete('/itens/:id', authClienteMiddleware, Item.remove);
+routes.post('/itens', Item.create);
+routes.get('/itens', Item.read);
+routes.get('/itens/:id', Item.readOne);
+routes.put('/itens/:id', Item.update);
+routes.delete('/itens/:id', Item.remove);
 
 // Checkout
 routes.post('/checkout', authClienteMiddleware, checkout);
 
 // --- Rotas protegidas de funcionário ---
-routes.get('/funcionarios', authMiddleware, Funcionario.read);
+routes.get('/funcionarios', Funcionario.read);
 
 // Estoque
-routes.post('/estoque', authMiddleware, Estoque.create);
-routes.get('/estoque', authMiddleware, Estoque.read);
+routes.post('/estoque', Estoque.create);
+routes.get('/estoque',  Estoque.read);
 
 // Produtos
-routes.post('/produtos', authMiddleware, Produto.create);
-routes.get('/produtos', authMiddleware, Produto.read);
+routes.post('/produtos', Produto.create);
+routes.get('/produtos', Produto.read);
 
 module.exports = routes;
